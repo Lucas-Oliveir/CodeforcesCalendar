@@ -1,0 +1,29 @@
+name: Codeforces → Google Calendar
+
+on:
+  schedule:
+    - cron: "0 */4 * * *"  # roda a cada 4 horas
+  workflow_dispatch:       # permite rodar manualmente
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade requests google-api-python-client google-auth google-auth-oauthlib
+
+      - name: Restore KEY.json
+        run: echo "${{ secrets.GOOGLE_KEY }}" > KEY.json
+
+      - name: Run script
+        run: python3 porra.py
