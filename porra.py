@@ -25,13 +25,23 @@ def colher_contests():
         exit()
 
     data = response.json()
-
     print("Status da Api: ", data["status"])
+    v = []
+    with open("pastcontests.txt","r") as arq:
+        for linha in arq:
+                num = linha.strip()
+                if num:
+                    v.append(int(num))
 
+    pastcontest = []
     contest = []
     for i in data["result"]:
         if i["phase"] != "BEFORE":
             break
+        if i["id"] in v:
+            pastcontest.append(i["id"])
+            continue
+
         contest.append({
             "summary": i["name"],
             "start": {
@@ -44,6 +54,11 @@ def colher_contests():
             },
             "description": "Contest link: https://codeforces.com/contests/" + str(i["id"]) 
         })
+        pastcontest.append(i["id"])
+    
+    with open("pastcontests.txt","w") as arq:
+        for i in pastcontest:
+            print(i,file=arq)
 
     return contest
 
