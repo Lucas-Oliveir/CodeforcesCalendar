@@ -23,7 +23,9 @@ jobs:
           pip install --upgrade requests google-api-python-client google-auth google-auth-oauthlib
 
       - name: Restore KEY.json
-        run: printf -E "%s" "${{ secrets.GOOGLE_KEY }}" > KEY.json
-
+          run: |
+          cat <<EOF > KEY.json
+          ${{ secrets.GOOGLE_KEY }}
+          EOF
       - name: Run script
         run: python3 porra.py
