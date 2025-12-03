@@ -2,8 +2,8 @@ name: Codeforces → Google Calendar
 
 on:
   schedule:
-    - cron: "0 */4 * * *"  # roda a cada 4 horas
-  workflow_dispatch:       # permite rodar manualmente
+    - cron: "0 */4 * * *" 
+  workflow_dispatch:       
 
 jobs:
   run:
@@ -23,7 +23,7 @@ jobs:
           pip install --upgrade requests google-api-python-client google-auth google-auth-oauthlib
 
       - name: Restore KEY.json
-        run: | # CORREÇÃO DE IDENTAÇÃO APLICADA
+        run: |
           cat <<EOF > KEY.json
           ${{ secrets.GOOGLE_KEY }}
           EOF
