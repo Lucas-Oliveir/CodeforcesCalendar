@@ -36,7 +36,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          if ! git diff --quiet dados/arquivo.txt; then
+          if ! git diff --quiet arquivo.txt; then
             git add pastcontests.txt
             git commit -m "Atualiza pastcontests.txt automaticamente"
             git push
