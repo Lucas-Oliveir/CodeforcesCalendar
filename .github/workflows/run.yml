@@ -30,3 +30,17 @@ jobs:
 
       - name: Run script
         run: python3 porra.py
+        
+      - name: Commit arquivo atualizado
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          if ! git diff --quiet dados/arquivo.txt; then
+            git add dados/arquivo.txt
+            git commit -m "Atualiza dados/arquivo.txt automaticamente"
+            git push
+          else
+            echo "Nenhuma mudança no arquivo"
+          fi
+
