@@ -37,7 +37,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
           if ! git diff --quiet dados/arquivo.txt; then
-            git add dados/arquivo.txt
+            git add dados/pastcontests.txt
             git commit -m "Atualiza dados/arquivo.txt automaticamente"
             git push
           else
